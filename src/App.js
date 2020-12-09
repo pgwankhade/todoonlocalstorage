@@ -1,23 +1,18 @@
-import logo from './logo.svg';
+import Register from './Register'
+import LogIn from './LogIn'
+import Todo from './Todo'
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+
+  const[rout,setRout]=useState()
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Todo/>
+     <Register/>
+     <LogIn/>
     </div>
   );
 }
