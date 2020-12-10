@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 
-function Register() {
+function Register({onRouteChange}) {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
@@ -20,16 +20,20 @@ function Register() {
     }
 
     const onsubmit = () =>{
+       
+        const Items={
+            name:name,
+            email:email,
+            pass:password
+        };
         const data = localStorage.getItem("signin")
-        if (data) {
-            const updated = [...JSON.parse(data), name, email, password]
-            (updated)
-            localStorage.setItem("signin", JSON.stringify(updated))
+        if(localStorage.getItem('signin')==null){
+            const updated = [...JSON.parse(data), name, email,password]
+            localStorage.setItem("signin",JSON.stringify(updated))
         }
-        else {
-            localStorage.setItem("signin", JSON.stringify([name, email,password]))
+        else{
+            localStorage.setItem("signin",JSON.stringify(name,email,password))
         }
-
     }
 
      
@@ -46,12 +50,12 @@ function Register() {
                             <input onChange={onnamechange} class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="email-address" id="email-address" />
                         </div>
                         <div class="mt3">
-                            <label class="db fw6 lh-copy f6" for="email-address">Email</label>
+                            <label onChange={onemailchange} class="db fw6 lh-copy f6" for="email-address">Email</label>
                             <input class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address" id="email-address" />
                         </div>
                         <div class="mv3">
                             <label class="db fw6 lh-copy f6" for="password">Password</label>
-                            <input class="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password" id="password" />
+                            <input onChange={onpasschange}  class="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password" id="password" />
                         </div>
                         <label class="pa0 ma0 lh-copy f6 pointer"><input type="checkbox" /> Remember me</label>
                     </fieldset>

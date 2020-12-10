@@ -29,8 +29,20 @@ function Todo() {
 
     return (
         <div>
-            <input onChange={onInputChange} placeholder='add task here' class="input-reset ba b--black-20 pa2 mb2 db center w-30 mt2" />
-            <button onClick={onaddTask} class="f6 link dim ph3 pv2 mb2 dib white bg-blue">add</button>
+            <div className=" App flex items-center mt3 mw5 mw7-ns center bg-light-gray pa2 ph5-ns ">
+                <input
+                  onChange={onInputChange}
+                  placeholder="add task.."
+                  className="center pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  type="text"
+                  name="name"
+                  id="name"
+                />
+                <button 
+                onClick={onaddTask}
+                className="ml2 mt2 f6 link dim ph3 pv2 mb2 dib white bg-dark-blue"
+                >Add</button>
+              </div> 
             {
                 tasklist.map((item, i) => (
                     <div className="App2">
