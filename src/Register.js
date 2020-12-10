@@ -1,6 +1,40 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 
 function Register() {
+
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [name, setName] = useState();
+
+    const onemailchange =(e)=>{
+        setEmail(e.target.value)
+    }
+
+    const onpasschange = (e) =>{
+        setPassword(e.target.value)
+    }
+
+    const onnamechange =(e)=>{
+        setName(e.target.value)
+    }
+
+    const onsubmit = () =>{
+        const data = localStorage.getItem("signin")
+        if (data) {
+            const updated = [...JSON.parse(data), name, email, password]
+            (updated)
+            localStorage.setItem("signin", JSON.stringify(updated))
+        }
+        else {
+            localStorage.setItem("signin", JSON.stringify([name, email,password]))
+        }
+
+    }
+
+     
+    
+
     return (
         <div className="mw6 center bg-white br3 pa2 pa4-ns mv3 ba b--black-10">
             <main class="pa4 black-80">
@@ -9,7 +43,7 @@ function Register() {
                         <legend class="f4 fw6 ph0 mh0">Register</legend>
                         <div class="mt3">
                             <label class="db fw6 lh-copy f6" for="email-address">name</label>
-                            <input class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address" id="email-address" />
+                            <input onChange={onnamechange} class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="email-address" id="email-address" />
                         </div>
                         <div class="mt3">
                             <label class="db fw6 lh-copy f6" for="email-address">Email</label>
@@ -22,11 +56,10 @@ function Register() {
                         <label class="pa0 ma0 lh-copy f6 pointer"><input type="checkbox" /> Remember me</label>
                     </fieldset>
                     <div class="">
-                        <input class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Sign in" />
+                        <input onClick={onsubmit} class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Sign in" />
                     </div>
                     <div class="lh-copy mt3">
-                        <a href="#0" class="f6 link dim black db">Sign up</a>
-                        <a href="#0" class="f6 link dim black db">Forgot your password?</a>
+                    <Link to='/'><p className="f6 link dim black db pointer">Log In</p></Link> 
                     </div>
                 </form>
             </main>

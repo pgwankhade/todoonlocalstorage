@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Register from './Register'
 import LogIn from './LogIn'
 import Todo from './Todo'
@@ -6,14 +7,28 @@ import { useState } from 'react';
 
 function App() {
 
-  const[rout,setRout]=useState()
+  const[route,setRoute]=useState('signin')
+
+ const onRouteChange = (route) => {
+    setRoute(route);
+  } 
   
   return (
-    <div className="App">
-     <Todo/>
-     <Register/>
-     <LogIn/>
-    </div>
+    <Router>
+    { route === 'home'?
+       <div>
+             <Todo/>
+        </div>  
+        :(
+          <div>
+
+             <Route path='/register' component={()=><Register onRouteChange={onRouteChange}/>} />    
+             <Route path='/' exact component={()=><LogIn onRouteChange={onRouteChange} />} />
+            
+          </div>
+        )
+    }
+  </Router>
   );
 }
 

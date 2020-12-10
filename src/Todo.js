@@ -1,23 +1,28 @@
 import react, { useState, useEffect } from 'react';
 
 function Todo() {
-    const [addtask, setAddtask] = useState([]);
+    const [addtask, setAddtask] = useState("");
     const [tasklist, setTasklist] = useState([]);
     const onInputChange = (e) => {
-        setAddtask([...addtask, e.target.value])
+        setAddtask(e.target.value)
     }
 
     const onaddTask = () => {
-        localStorage.setItem("addtask", JSON.stringify(addtask))
-        const data = localStorage.getItem("addtask")
+        const data = localStorage.getItem("tasklist")
         if (data) {
-            setTasklist(JSON.parse(data))
+            const updated = [...JSON.parse(data), addtask]
+            setTasklist(updated)
+            localStorage.setItem("tasklist", JSON.stringify(updated))
+        }
+        else {
+            setTasklist([addtask])
+            localStorage.setItem("tasklist", JSON.stringify([addtask]))
         }
     }
 
     const deleteTask = (item) => {
-        const filtered = addtask.filter(task => task !== item)
-        const data = localStorage.setItem("addtask", JSON.stringify(filtered))
+        const filtered = tasklist.filter(task => task !== item)
+        const data = localStorage.setItem("tasklist", JSON.stringify(filtered))
         setTasklist([...filtered])
     }
 
