@@ -30,9 +30,11 @@ function Register({onRouteChange}) {
         if(localStorage.getItem('signin')==null){
             const updated = [...JSON.parse(data), name, email,password]
             localStorage.setItem("signin",JSON.stringify(updated))
+            onRouteChange('home')
         }
         else{
             localStorage.setItem("signin",JSON.stringify(name,email,password))
+            onRouteChange('home')
         }
     }
 
