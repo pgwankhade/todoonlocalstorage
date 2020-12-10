@@ -28,12 +28,14 @@ function Register({onRouteChange}) {
         };
         const data = localStorage.getItem("signin")
         if(localStorage.getItem('signin')==null){
-            const updated = [...JSON.parse(data), name, email,password]
-            localStorage.setItem("signin",JSON.stringify(updated))
-            onRouteChange('home')
+            const signin=[]
+            signin.push(Items);
+            localStorage.setItem("signin",JSON.stringify(signin))
         }
         else{
-            localStorage.setItem("signin",JSON.stringify(name,email,password))
+            const signin=JSON.parse(localStorage.getItem('signin'))
+            signin.push(Items)
+            localStorage.setItem("signin",JSON.stringify(signin))
             onRouteChange('home')
         }
     }
