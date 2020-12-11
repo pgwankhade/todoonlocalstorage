@@ -26,11 +26,12 @@ function Register({onRouteChange}) {
             email:email,
             pass:password
         };
-        const data = localStorage.getItem("signin")
+        
         if(localStorage.getItem('signin')==null){
             const signin=[]
             signin.push(Items);
             localStorage.setItem("signin",JSON.stringify(signin))
+            onRouteChange('home')
         }
         else{
             const signin=JSON.parse(localStorage.getItem('signin'))
@@ -51,7 +52,7 @@ function Register({onRouteChange}) {
                         <legend class="f4 fw6 ph0 mh0">Register</legend>
                         <div class="mt3">
                             <label class="db fw6 lh-copy f6" for="email-address">name</label>
-                            <input onChange={onnamechange} class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="email-address" id="email-address" />
+                            <input onChange={onnamechange} class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="name" id="name" />
                         </div>
                         <div class="mt3">
                             <label onChange={onemailchange} class="db fw6 lh-copy f6" for="email-address">Email</label>
